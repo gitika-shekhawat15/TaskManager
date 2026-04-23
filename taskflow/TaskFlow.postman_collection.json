@@ -1,0 +1,365 @@
+{
+  "info": {
+    "_postman_id": "d7ecabba-6578-49f8-ad9f-016fb20a78d8",
+    "name": "TaskFlow API",
+    "description": "TaskFlow REST API - Authentication & Task Management  \nBase URL: [http://localhost:5000/api/v1](http://localhost:5000/api/v1)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "47456277"
+  },
+  "item": [
+    {
+      "name": "Register User",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"User2\",\r\n    \"email\": \"user2@example.com\",\r\n    \"password\": \"password2\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/v1/auth/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "v1",
+            "auth",
+            "register"
+          ]
+        },
+        "description": "Register a new user account.  \nRole defaults to \"user\"."
+      },
+      "response": []
+    },
+    {
+      "name": "Login User",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"user2@example.com\",\r\n    \"password\": \"password2\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/v1/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "v1",
+            "auth",
+            "login"
+          ]
+        },
+        "description": "Login with email and password.  \nReturns JWT token for authentication."
+      },
+      "response": []
+    },
+    {
+      "name": "GET User Profile",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZTljOWIxMjBiYzkwZjA0ZjkzZDgwZSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzc2OTI5MjMzLCJleHAiOjE3Nzc1MzQwMzN9.bAYZYPv_z51b_H-pNiKmQHtz8QHF8ZNIe8ofLlQD0cM",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/v1/auth/me",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "v1",
+            "auth",
+            "me"
+          ]
+        },
+        "description": "Get current logged in user details.  \nRequires Bearer token in Authorization header."
+      },
+      "response": []
+    },
+    {
+      "name": "Create Task",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZTljOWIxMjBiYzkwZjA0ZjkzZDgwZSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzc2OTI5MjMzLCJleHAiOjE3Nzc1MzQwMzN9.bAYZYPv_z51b_H-pNiKmQHtz8QHF8ZNIe8ofLlQD0cM",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"My second Task\",\r\n  \"description\": \"This is my second task description.\",\r\n  \"priority\": \"medium\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/v1/tasks",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "v1",
+            "tasks"
+          ]
+        },
+        "description": "Create a new task.  \nRequires Bearer token."
+      },
+      "response": []
+    },
+    {
+      "name": "Update Tasks By User",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZTljOWIxMjBiYzkwZjA0ZjkzZDgwZSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzc2OTI5MjMzLCJleHAiOjE3Nzc1MzQwMzN9.bAYZYPv_z51b_H-pNiKmQHtz8QHF8ZNIe8ofLlQD0cM",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"My Updated Task\",\r\n  \"description\": \"Thisis an updated task description.\",\r\n  \"priority\": \"high\",\r\n  \"status\": \"completed\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/v1/tasks/69e9d1ce20bc90f04f93d810",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "v1",
+            "tasks",
+            "69e9d1ce20bc90f04f93d810"
+          ]
+        },
+        "description": "Update tasks based on role.Update task fields (title, description, status, priority).  \nUser: Update own tasks only"
+      },
+      "response": []
+    },
+    {
+      "name": "Get Task By User",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZTljOWIxMjBiYzkwZjA0ZjkzZDgwZSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzc2OTI5MjMzLCJleHAiOjE3Nzc1MzQwMzN9.bAYZYPv_z51b_H-pNiKmQHtz8QHF8ZNIe8ofLlQD0cM",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/v1/tasks/",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "v1",
+            "tasks",
+            ""
+          ]
+        },
+        "description": "Get a single task by ID.  \nUser can only access own tasks."
+      },
+      "response": []
+    },
+    {
+      "name": "Login Admin",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"admin@taskflow.com\",\r\n    \"password\": \"admin123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/v1/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "v1",
+            "auth",
+            "login"
+          ]
+        },
+        "description": "Login Admin with email and password.  \nReturns JWT token for authentication."
+      },
+      "response": []
+    },
+    {
+      "name": "Get Admin Profile",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZTljODFlY2IwMTA3YWE2ZGMyYTQ3MCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3NjkyOTg4MSwiZXhwIjoxNzc3NTM0NjgxfQ.h6OOyM-BmFr_FCTAN5ZXIgrgkinMGnprHghEqTnoBEE",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/v1/auth/me",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "v1",
+            "auth",
+            "me"
+          ]
+        },
+        "description": "Get current logged in Admin details.  \nRequires Bearer token in Authorization header."
+      },
+      "response": []
+    },
+    {
+      "name": "Update Task By Admin",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZTljODFlY2IwMTA3YWE2ZGMyYTQ3MCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3NjkyOTg4MSwiZXhwIjoxNzc3NTM0NjgxfQ.h6OOyM-BmFr_FCTAN5ZXIgrgkinMGnprHghEqTnoBEE",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"description\": \"Develop a blockchain and deploy it on a cloud platform\",\r\n    \"priority\": \"high\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/v1/tasks/69e9c4df7fa8136959295f09",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "v1",
+            "tasks",
+            "69e9c4df7fa8136959295f09"
+          ]
+        },
+        "description": "Update task fields (title, description, status, priority).  \nUser can only update own tasks.  \nAdmin can update any task."
+      },
+      "response": []
+    },
+    {
+      "name": "Get ALL Tasks By Admin",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZTljODFlY2IwMTA3YWE2ZGMyYTQ3MCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3NjkyOTg4MSwiZXhwIjoxNzc3NTM0NjgxfQ.h6OOyM-BmFr_FCTAN5ZXIgrgkinMGnprHghEqTnoBEE",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/v1/tasks/",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "v1",
+            "tasks",
+            ""
+          ]
+        },
+        "description": "Get tasks based on role.\n\n- User: returns own tasks only\n    \n- Admin: returns all tasks  \n    Requires Bearer token."
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Task By Admin",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZTljODFlY2IwMTA3YWE2ZGMyYTQ3MCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3NjkyOTg4MSwiZXhwIjoxNzc3NTM0NjgxfQ.h6OOyM-BmFr_FCTAN5ZXIgrgkinMGnprHghEqTnoBEE",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/v1/tasks/69e9ca8720bc90f04f93d80f",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "v1",
+            "tasks",
+            "69e9ca8720bc90f04f93d80f"
+          ]
+        },
+        "description": "Delete a task by ID.  \nUser can only delete own tasks.  \nAdmin can delete any task."
+      },
+      "response": []
+    }
+  ]
+}
